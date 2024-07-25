@@ -1,6 +1,6 @@
 import Header from './Header';
 import Footer from './Footer';
-import TransactionInput from './TransactionInput';
+import ToAddTransactionPageBtn from './ToAddTransactionPageBtn';
 import TransactionCollection from './TransactionCollection';
 
-export { Header, TransactionInput, TransactionCollection, Footer };
+export { Header, ToAddTransactionPageBtn, TransactionCollection, Footer };

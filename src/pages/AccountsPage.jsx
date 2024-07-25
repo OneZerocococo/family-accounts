@@ -1,4 +1,4 @@
-import { Header, Footer, TransactionInput, TransactionCollection } from '../components';
+import { Header, Footer, ToAddTransactionPageBtn, TransactionCollection } from '../components';
 
 const dummyTransactions = [
   {
@@ -36,7 +36,7 @@ const AccountsPage = () => {
     <>
     <Header />
       <div className='mt-4 min-w-[350px] border-2 rounded-md min-h-64 p-5 mb-5 border-cyan-500'>
-        <TransactionInput
+        <ToAddTransactionPageBtn
         />
         <TransactionCollection
           transactions={dummyTransactions}
