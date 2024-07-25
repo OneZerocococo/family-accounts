@@ -1,11 +1,19 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Header } from '../components';
 
 const AddTransactionPage = () => {
+  const [imgSrc, setImgSrc] = useState(null)
   const fileInputRef = useRef(null)
   const handleDivClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click()
+    }
+  }
+  const handleFileChange = (event) => {
+    const file = event.target.files[0]
+    if (file) {
+      const url = URL.createObjectURL(file)
+      setImgSrc(url)
     }
   }
 
@@ -40,13 +48,18 @@ const AddTransactionPage = () => {
               className="flex flex-grow border-dashed border-2 border-sky-300 min-h-20 items-center text-center justify-center"
               onClick={handleDivClick}
             >
-              + 上傳圖片
+              {imgSrc ? (
+                <img src={imgSrc} alt="Uploaded preview" className="max-h-40 object-cover" />
+              ) : (
+                '+ 上傳圖片'
+              )}
             </div>
             <input
               type="file"
               ref={fileInputRef}
               className="hidden"
               accept="image/*"
+              onChange={handleFileChange}
             />
           </div>
           <button className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">確認送出</button>
