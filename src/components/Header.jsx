@@ -1,11 +1,7 @@
 const Header = () => {
   return (
     <header className="justify-between items-center text-primary p-0 px-4">
-      <h3 className="font-normal select-none">帳務紀錄</h3>
-
-      <div>
-        Hi <span>510</span>
-      </div>
+      <h2 className="text-cyan-600 text-2xl font-bold">帳務紀錄</h2>
     </header>
   );
 };
