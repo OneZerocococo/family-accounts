@@ -11,7 +11,7 @@ const TransactionItem = ({ transaction }) => {
           <span className="task-item-body-amount mr-1">{transaction.amount}</span>
         </div>
         <div>
-          <button className="mr-1 bg-sky-700 text-white font-bold py-2 px-4 rounded">修改</button>
+          {/* <button className="mr-1 bg-sky-700 text-white font-bold py-2 px-4 rounded">修改</button> */}
         </div>
       </div>
     </div>
