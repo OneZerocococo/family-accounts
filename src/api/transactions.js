@@ -18,3 +18,12 @@ export const getBalance = async (groupId, endDate) => {
     console.error('[Get balance failed]: ', error)
   }
 }
+
+export const getCategories = async () => {
+  try {
+    const res = await axios.get(`${baseUrl}/categories`)
+    return res.data
+  } catch (error) {
+    console.error('[Get categories failed]: ', error)
+  }
+}

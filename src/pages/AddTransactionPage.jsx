@@ -1,15 +1,30 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { sendMessage } from '../liffInit';
+import { getCategories } from '../api/transactions';
 
 const AddTransactionPage = () => {
+  const [categories, setCategories] = useState([])
   const [imgSrc, setImgSrc] = useState(null)
   const [date, setDate] = useState('');
   const [category, setCategory] = useState('');
   const [item, setItem] = useState('');
   const [amount, setAmount] = useState('');
-
   const fileInputRef = useRef(null)
   
+  useEffect(() => {
+    const getCategoriesAsync = async () => {
+      try {
+        const categories = await getCategories()
+        setCategories(categories)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getCategoriesAsync()
+  }, [])
+
+
+
   const handleDivClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click()
@@ -57,9 +72,11 @@ const AddTransactionPage = () => {
               className="flex-grow p-1 border border-sky-300 rounded focus:outline-none focus:border-sky-700"
             >
               <option value="" disabled>請選擇</option>
-              <option value="民生">民生</option>
-              <option value="娛樂">娛樂</option>
-              <option value="交通">交通</option>
+              {categories.map(category => (
+                <option key={category.category_id} value={category.category_id}>
+                  {category.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="form-item items-center flex mb-3">
