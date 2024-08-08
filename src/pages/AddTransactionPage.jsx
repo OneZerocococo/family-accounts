@@ -24,6 +24,7 @@ const AddTransactionPage = () => {
   }
 
   const handleClick = async () => {
+    console.log(date)
     // 上傳圖片 
     const transaction = {
       // 圖片網址

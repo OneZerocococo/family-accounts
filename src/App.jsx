@@ -28,7 +28,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='login' element={<LoginPage />} />
-          <Route path='accounts' element={<AccountsPage />} />
+          <Route path='accounts/:group_id' element={<AccountsPage />} />
           <Route path='addOne' element={<AddTransactionPage />} />
         </Routes>
       </BrowserRouter>

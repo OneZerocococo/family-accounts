@@ -1,44 +1,36 @@
 import { Footer, ToAddTransactionPageBtn, TransactionCollection } from '../components';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getTransactions } from '../api/transactions';
 
-const dummyTransactions = [
-  {
-    id: "1",
-    date: '2024/07/20',
-    categoryName: '民生',
-    title: '瓦斯',
-    amount: 600
-  },
-  {
-    id: "2",
-    date: '2024/07/22',
-    categoryName: '民生',
-    title: '第四台',
-    amount: 499
-  },
-  {
-    id: "3",
-    date: '2024/07/23',
-    categoryName: '餐飲',
-    title: '家庭聚餐',
-    amount: 1308
-  },
-  {
-    id: "4",
-    date: '2024/07/25',
-    categoryName: '家電',
-    title: '電風扇',
-    amount: 780
-  },
-]
 const AccountsPage = () => {
-  
+  const { group_id } = useParams()
+  const [transactions, setTransactions] = useState([])
+
+  useEffect(() => {
+    const getTransactionsAsync = async () => {
+      try {
+        const transactions = await getTransactions(group_id);
+        setTransactions(transactions.map(transaction => {
+          return {
+            ...transaction,
+            isEdit: false
+          }
+        }))
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getTransactionsAsync();
+  }, [group_id])
+
   return (
     <>
       <div className='mt-10 w-full border-2 rounded-md mb-5 border-cyan-500'>
         <ToAddTransactionPageBtn
         />
         <TransactionCollection
-          transactions={dummyTransactions}
+          transactions={transactions}
         />
         <Footer />
       </div>

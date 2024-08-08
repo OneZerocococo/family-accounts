@@ -16,8 +16,8 @@ TransactionCollection.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
-      categoryName: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
+      category_name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
       amount: PropTypes.number.isRequired,
     }).isRequired
   ).isRequired,
