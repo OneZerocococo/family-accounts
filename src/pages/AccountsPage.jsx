@@ -1,7 +1,7 @@
-import { Footer, ToAddTransactionPageBtn, TransactionCollection } from '../components';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getTransactions } from '../api/transactions';
+import { Footer, ToAddTransactionPageBtn, TransactionCollection } from '../components'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { getTransactions } from '../api/transactions'
 
 const AccountsPage = () => {
   const { group_id } = useParams()
@@ -10,7 +10,7 @@ const AccountsPage = () => {
   useEffect(() => {
     const getTransactionsAsync = async () => {
       try {
-        const transactions = await getTransactions(group_id);
+        const transactions = await getTransactions(group_id)
         setTransactions(transactions.map(transaction => {
           return {
             ...transaction,
@@ -21,7 +21,7 @@ const AccountsPage = () => {
         console.error(error)
       }
     }
-    getTransactionsAsync();
+    getTransactionsAsync()
   }, [group_id])
 
   return (
@@ -35,7 +35,7 @@ const AccountsPage = () => {
         <Footer />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default AccountsPage;
+export default AccountsPage

@@ -1,6 +1,14 @@
-import { getBalance } from '../api/transactions.js';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { getBalance } from '../api/transactions.js'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+
+const getCurrentMonthEndDate = () => {
+  const now = new Date()
+  const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()
+  const endDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(lastDayOfMonth).padStart(2, '0')}`
+
+  return endDate
+}
 
 const Footer = () => {
   const { group_id } = useParams()
@@ -9,7 +17,8 @@ const Footer = () => {
   useEffect(() => {
     const getBalanceAsync = async () => {
       try {
-        const balance = await getBalance(group_id)
+        const endDate = getCurrentMonthEndDate()
+        const balance = await getBalance(group_id, endDate)
         setBalance(balance)
       } catch (error) {
         console.error(error)
@@ -24,7 +33,7 @@ const Footer = () => {
         餘額： <span>{balance.toLocaleString('en-US')}</span>
       </p>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

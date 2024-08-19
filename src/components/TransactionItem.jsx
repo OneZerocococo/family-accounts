@@ -14,7 +14,7 @@ const TransactionItem = ({ transaction }) => {
       <div className="task-item-body flex justify-between w-full">
         <div className="grid grid-cols-[1fr_1fr_2fr_1fr] gap-1 items-center">
           <span className="task-item-body-date mr-1">{localDate}</span>
-          <span className="task-item-body-category mr-1">{transaction.category_name}</span>
+          <span className="task-item-body-category mr-1">{transaction.category.name}</span>
           <span className="task-item-body-text mr-1">{transaction.description}</span>
           <span className="task-item-body-amount mr-2 text-right">${formattedAmount}</span>
         </div>
@@ -23,18 +23,18 @@ const TransactionItem = ({ transaction }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 TransactionItem.propTypes = {
   transaction: 
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
-      category_name: PropTypes.string.isRequired,
+      category: PropTypes.object.isRequired,
       description: PropTypes.string.isRequired,
       amount: PropTypes.number.isRequired,
     }).isRequired
-};
+}
 
 export default TransactionItem;

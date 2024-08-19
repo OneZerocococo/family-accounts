@@ -39,7 +39,7 @@ export const sendMessage = async (transaction) => {
               },
               {
                 "type": "text",
-                "text": transaction.item,
+                "text": transaction.description,
                 "weight": "bold",
                 "size": "xxl",
                 "margin": "md"

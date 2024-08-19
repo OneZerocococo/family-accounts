@@ -1,9 +1,10 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ToAddTransactionPageBtn = () => {
+  const { group_id } = useParams()
   const navigate = useNavigate()
   const handleClick = () => {
-    navigate('/addOne')
+    navigate(`/addOne/${group_id}`)
   }
   return (
     <div className="my-5">
@@ -12,7 +13,7 @@ const ToAddTransactionPageBtn = () => {
         onClick={handleClick}
       >新增一筆紀錄</button>
     </div>
-  );
-};
+  )
+}
 
-export default ToAddTransactionPageBtn;
+export default ToAddTransactionPageBtn

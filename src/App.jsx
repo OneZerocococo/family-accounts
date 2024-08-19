@@ -29,7 +29,7 @@ function App() {
         <Routes>
           <Route path='login' element={<LoginPage />} />
           <Route path='accounts/:group_id' element={<AccountsPage />} />
-          <Route path='addOne' element={<AddTransactionPage />} />
+          <Route path='addOne/:group_id' element={<AddTransactionPage />} />
         </Routes>
       </BrowserRouter>
     </div>

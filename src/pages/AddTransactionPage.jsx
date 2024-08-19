@@ -1,15 +1,18 @@
 import { useRef, useState, useEffect } from 'react';
 import { sendMessage } from '../liffInit';
-import { getCategories } from '../api/transactions';
+import { getCategories, createTransaction } from '../api/transactions';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const AddTransactionPage = () => {
+  const { group_id } = useParams()
   const [categories, setCategories] = useState([])
   const [imgSrc, setImgSrc] = useState(null)
   const [date, setDate] = useState('');
-  const [category, setCategory] = useState('');
-  const [item, setItem] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+  const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const fileInputRef = useRef(null)
+  const navigate = useNavigate()
   
   useEffect(() => {
     const getCategoriesAsync = async () => {
@@ -39,17 +42,21 @@ const AddTransactionPage = () => {
   }
 
   const handleClick = async () => {
-    console.log(date)
+    const selectedCategory = categories.find(category => category.id === categoryId)
     // 上傳圖片 
     const transaction = {
       // 圖片網址
       date,
-      category,
-      item,
+      category: selectedCategory,
+      description,
       amount,
-    };
-    await sendMessage(transaction);
-  };
+      groupId: group_id
+    }
+    console.log('transaction: ', transaction)
+    await createTransaction(transaction)
+    await sendMessage(transaction)
+    navigate(`/accounts/${group_id}`)
+  }
 
   return (
     <>
@@ -67,13 +74,13 @@ const AddTransactionPage = () => {
           <div className="form-item flex items-center mb-3">
             <label className="mr-5">類別</label>
             <select
-              value={category}
-              onChange={e => setCategory(e.target.value)}
+              value={categoryId}
+              onChange={e => setCategoryId(e.target.value)}
               className="flex-grow p-1 border border-sky-300 rounded focus:outline-none focus:border-sky-700"
             >
               <option value="" disabled>請選擇</option>
               {categories.map(category => (
-                <option key={category.category_id} value={category.category_id}>
+                <option key={category.id} value={category.id}>
                   {category.name}
                 </option>
               ))}
@@ -83,8 +90,8 @@ const AddTransactionPage = () => {
             <label className="mr-5">品項</label>
             <input
               type="text"
-              value={item}
-              onChange={e => setItem(e.target.value)}
+              value={description}
+              onChange={e => setDescription(e.target.value)}
               className="flex-grow p-1 border border-sky-300 rounded focus:outline-none focus:border-sky-700" />
           </div>
           <div className="form-item items-center flex mb-3">
@@ -92,7 +99,7 @@ const AddTransactionPage = () => {
             <input
               type="number"
               value={amount}
-              onChange={e => setAmount(e.target.value)}
+              onChange={e => setAmount(parseFloat(e.target.value))}
               className="flex-grow p-1 border border-sky-300 rounded focus:outline-none focus:border-sky-700"
             />
           </div>
