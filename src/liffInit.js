@@ -66,7 +66,7 @@ export const sendMessage = async (transaction) => {
                 "action": {
                   "type": "uri",
                   "label": "查看詳細",
-                  "uri": `${import.meta.env.VITE_APP_URL}/accounts`
+                  "uri": `${import.meta.env.VITE_APP_URL}/accounts/${transaction.groupId}`
                 }
               }
             ]

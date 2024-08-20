@@ -60,7 +60,7 @@ const AddTransactionPage = () => {
 
   return (
     <>
-      <div className="w-full border-4 border-sky-500 p-4 bg-white rounded-md mt-8">
+      <div className="mt-10 w-full border-4 border-sky-500 p-4 bg-white rounded-md">
         <form className="grid" action="" onSubmit={event => event.preventDefault()}>
           <div className="form-item items-center flex  mb-3">
             <label className="mr-5">日期</label>
