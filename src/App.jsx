@@ -31,7 +31,7 @@ function App() {
   return (
     <div className="app">
       <Header profile={profile} loading={loading} />
-      <BrowserRouter>
+      <BrowserRouter basename='/family-accounts/'>
         <Routes>
           <Route path='login' element={<LoginPage />} />
           <Route path='accounts/:group_id' element={<AccountsPage />} />
