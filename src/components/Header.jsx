@@ -7,7 +7,7 @@ const Header = ({ profile, loading }) => {
       <h2 className="text-white text-2xl font-bold m-auto">帳務紀錄</h2>
       {!loading && profile ? (
         <img
-          src={profile.pictureUrl}
+          src={profile.profile_picture}
           alt="User Profile"
           className="w-10 h-10 rounded-full my-auto"
         />
@@ -20,7 +20,7 @@ const Header = ({ profile, loading }) => {
 
 Header.propTypes = {
   profile: PropTypes.shape({
-    pictureUrl: PropTypes.string.isRequired,
+    profile_picture: PropTypes.string.isRequired,
   }),
   loading: PropTypes.bool.isRequired,
 }

@@ -1,4 +1,3 @@
-// src/liffInit.js
 import liff from '@line/liff';
 
 const liffId = import.meta.env.VITE_LIFF_ID
@@ -6,7 +5,6 @@ export const initializeLiff = async () => {
   try {
     await liff.init({ liffId });
     console.log('LIFF initialized');
-
     if (!liff.isLoggedIn()) {
       liff.login();
     }
@@ -20,6 +18,7 @@ export const sendMessage = async (transaction) => {
     if (!liff.isLoggedIn()) {
       liff.login();
     } else {
+      const amountColor = transaction.category.is_expense ? '#DC143C' : '#227700'
       await liff.sendMessages([{
         "type": "flex",
         "altText": "我新增了一筆紀錄",
@@ -46,10 +45,10 @@ export const sendMessage = async (transaction) => {
               },
               {
                 "type": "text",
-                "text": `$ ${transaction.amount}`,
+                "text": `$ ${transaction.amount.toLocaleString('en-US') }`,
                 "size": "xxl",
                 "align": "end",
-                "color": "#DC143C"
+                "color": amountColor
               },
               {
                 "type": "separator",

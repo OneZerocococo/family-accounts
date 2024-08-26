@@ -1,26 +1,32 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { Header } from './components';
-import LoginPage from './pages/LoginPage';
+import { Header } from './components'
+import LoginPage from './pages/LoginPage'
 import AccountsPage from './pages/AccountsPage'
 import AddTransactionPage from './pages/AddTransactionPage'
 import './App.css'
-import { initializeLiff, getUserProfile } from './liffInit';
+import { initializeLiff, getUserProfile } from './liffInit'
+import { userLogin } from './api/user'
 
 
 function App() {
-  const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [profile, setProfile] = useState(null)
+  const [loading, setLoading] = useState(true)
+
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      await initializeLiff();
-      const userProfile = await getUserProfile();
-      setProfile(userProfile);
-      setLoading(false);
-    };
-    fetchUserProfile();
-  }, []);
+      await initializeLiff()
+      const userProfile = await getUserProfile()
+      console.log('userProfile: ', userProfile)
+      // login
+      const loginResult = await userLogin(userProfile.userId)
+      setProfile(loginResult.userData)
+      setLoading(false)
+    }
+    fetchUserProfile()
+  }, [])
+
 
   return (
     <div className="app">
@@ -33,7 +39,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-  );
+  )
 }
 
 export default App
