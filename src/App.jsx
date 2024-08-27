@@ -21,6 +21,7 @@ function App() {
       console.log('userProfile: ', userProfile)
       // login
       const loginResult = await userLogin(userProfile.userId)
+      console.log('登入結果: ', loginResult)
       setProfile(loginResult.userData)
       setLoading(false)
     }
