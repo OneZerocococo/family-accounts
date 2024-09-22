@@ -32,7 +32,7 @@ function App() {
   return (
     <div className="app">
       <Header profile={profile} loading={loading} />
-      <BrowserRouter basename='/family-accounts/'>
+      <BrowserRouter>
         <Routes>
           <Route path='login' element={<LoginPage />} />
           <Route path='accounts/:group_id' element={<AccountsPage />} />
