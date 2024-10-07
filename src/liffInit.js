@@ -4,10 +4,10 @@ const liffId = import.meta.env.VITE_LIFF_ID
 export const initializeLiff = async () => {
   try {
     await liff.init({ liffId });
-    console.log('LIFF initialized');
-    if (!liff.isLoggedIn()) {
-      liff.login();
-    }
+    // console.log('LIFF initialized');
+    // if (!liff.isLoggedIn()) {
+    //   liff.login();
+    // }
   } catch (error) {
     console.error('Error initializing LIFF:', error);
   }
@@ -88,3 +88,12 @@ export const getUserProfile = async () => {
     console.error('Error getting profile:', error);
   }
 };
+
+export const getAccessToken = async () => {
+  try {
+    const lineAccessToken = liff.getAccessToken();
+    return lineAccessToken;
+  } catch (error) {
+    console.error('Error getting lineIdToken:', error);
+  }
+}

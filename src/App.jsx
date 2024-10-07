@@ -5,7 +5,7 @@ import LoginPage from './pages/LoginPage'
 import AccountsPage from './pages/AccountsPage'
 import AddTransactionPage from './pages/AddTransactionPage'
 import './App.css'
-import { initializeLiff, getUserProfile } from './liffInit'
+import { initializeLiff, getAccessToken } from './liffInit'
 import { userLogin } from './api/user'
 import { wakeUpServerApi } from './api/wakeUpServer'
 
@@ -18,10 +18,8 @@ function App() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       await initializeLiff()
-      const userProfile = await getUserProfile()
-      console.log('userProfile: ', userProfile)
-      // login
-      const loginResult = await userLogin(userProfile.userId)
+      const lineAccessToken = await getAccessToken()
+      const loginResult = await userLogin(lineAccessToken)
       console.log('登入結果: ', loginResult)
       setProfile(loginResult.userData)
       setLoading(false)
