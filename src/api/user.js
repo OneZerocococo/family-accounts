@@ -1,9 +1,9 @@
 import axios from "axios"
 const baseUrl = import.meta.env.VITE_API_URL
 
-export const userLogin = async (userId) => {
+export const userLogin = async (lineAccessToken) => {
   try {
-    const res = await axios.post(`${baseUrl}/user/login`, { userId })
+    const res = await axios.post(`${baseUrl}/user/login`, { lineAccessToken })
     return res.data
   } catch (error) {
     if (error.response && error.response.status === 401) {
