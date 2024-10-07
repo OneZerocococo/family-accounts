@@ -31,12 +31,8 @@ function App() {
       const retryDelay = 5000;
       try {
         const response = await wakeUpServerApi()
-        if (response.ok) {
-          setIsLoading(false);
-          console.log('API Server 已經被喚醒');
-        } else {
-          console.log('API Server 正在喚醒中...');
-        }
+        console.log('API Server 已經被喚醒:', response.data);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error waking up server:', error);
         if (retryCount < maxRetries) {
